@@ -25,6 +25,7 @@ h1, h2, h3, h4, h5, h6 {
     background-color: #898AA6;
     width: 100%;
     margin: 0 auto;
+    height: 20vh;
 }
 .container-fluid{
     font-size: 20px;
@@ -125,7 +126,7 @@ h1, h2, h3, h4, h5, h6 {
     border: solid 1px black;
     width: 25vw;
     height: 28vh;
-    margin: 1em;
+    margin: 1vw;
 }
 /* The stuff on top works*/
 /* Images need to be repositioned because our initial format doesn't work. 
@@ -133,7 +134,7 @@ If you want start from scratch you can just delete the styles code below and res
 .img1{
     display: block;
     position:absolute;
-    top: 17%;
+    top: 22%; /* + 3*/
     left: 13%;
     z-index: 1;
     border: solid 1px black;
@@ -142,7 +143,7 @@ If you want start from scratch you can just delete the styles code below and res
 .img2{
     display: block;
     position:absolute;
-    top: 15%;
+    top: 20%;
     left: 38%;
     z-index: 3;
     border: solid px black;
@@ -151,7 +152,7 @@ If you want start from scratch you can just delete the styles code below and res
 .img3{
     display: block;
     position:absolute;
-    top: 17%;
+    top: 22%;
     left: 63%;
     z-index: 2;
     border: solid 1px black;
@@ -162,7 +163,7 @@ If you want start from scratch you can just delete the styles code below and res
     height: 28vh;
     display: block;
     position:absolute;
-    top: 42.5%;
+    top: 47.5%;
     left: 11%;
     z-index: 0;
     border: solid 1px black;
@@ -173,7 +174,7 @@ If you want start from scratch you can just delete the styles code below and res
     width: 30vw;
     height: 33vh;
     position:absolute;
-    top: 40%;
+    top: 45%;
     left: 36%;
     z-index: 3;
     border: solid 3px black;
@@ -184,7 +185,7 @@ If you want start from scratch you can just delete the styles code below and res
     height: 28vh;
     display: block;
     position:absolute;
-    top: 42.5%;
+    top: 47.5%;
     left: 60%;
     z-index: 1;
     border: solid 1px black;
@@ -193,7 +194,7 @@ If you want start from scratch you can just delete the styles code below and res
 .img7{
     display: block;
     position:absolute;
-    top: 68%;
+    top: 73%;
     left: 13%;
     z-index: 1;
     border: solid 1px black;
@@ -202,7 +203,7 @@ If you want start from scratch you can just delete the styles code below and res
 .img8{
     display: block;
     position:absolute;
-    top: 70%;
+    top: 75%;
     left: 38%;
     z-index: 2;
     border: solid 1px black;
@@ -211,7 +212,7 @@ If you want start from scratch you can just delete the styles code below and res
 .img9{
     display: block;
     position:absolute;
-    top: 68%;
+    top: 73%;
     left: 62%;
     z-index: 1;
     border: solid 1px black;
