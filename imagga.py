@@ -2,8 +2,8 @@ import random, requests
 #TODO: Go here (https://imagga.com/profile/dashboard) to get your API key and secret to run locally
 #https://www.thecolorapi.com/docs to get brightness (to pick suitable color)
 
-imagga_api_key = "acc_b12a556274f53a1"
-imagga_api_secret = "9a9a0112fe89c17e1c31fb8c2aaeef7c"
+imagga_api_key = ""
+imagga_api_secret = ""
 imagga_color_url = "https://api.imagga.com/v2/colors?image_url="
 
 #Description: handles the api call to imagga
