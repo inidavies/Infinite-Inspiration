@@ -1,0 +1,219 @@
+/* This stuff works. Issues start with the images*/
+body {
+    font-family: "Poppins", sans-serif;
+    color: #444444; 
+    background-color: #C9BBCF;
+    /*width: 430px;
+    margin: 0 auto;*/
+    overflow: auto;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover {
+  color: black;
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Indie Flower', cursive;
+}
+.navbar{
+    background-color: #898AA6;
+    width: 100%;
+    margin: 0 auto;
+}
+.container-fluid{
+    font-size: 20px;
+    width: 15%;
+    height: 50%;
+    /* Center horizontally*/
+    margin: 0 auto;
+}
+.navbar-custom {
+  position: absolute;
+  margin:0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 3;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.navbar-custom .navbar-brand {
+  font-weight: 800;
+}
+.navbar-custom .navbar-header .navbar-toggle {
+  color: #777777;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+@use postcss-color-function;
+@use postcss-nested;
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,700,900');
+
+.search__container {
+    /*position: absolute;
+    top: 10px;
+    left: 600px;
+    position: relative;
+    right:10em;*/
+
+    margin-top: 200px;
+    margin-left: 550px;
+}
+    
+.search__input {
+    width: 50em;
+    padding: 12px 24px;
+
+    background-color: transparent;
+    transition: transform 250ms ease-in-out;
+    font-size: 14px;
+    line-height: 18px;
+    
+    color: #575756;
+    background-color: transparent;
+
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: 18px 18px;
+    background-position: 95% center;
+    border-radius: 50px;
+    border: 1px solid #575756;
+    transition: all 250ms ease-in-out;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+}
+.search__input::placeholder {
+    color: color(#575756 a(0.8));
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+        
+.search__input:hover, focus {
+    padding: 12px 0;
+    outline: 0;
+    border: 1px solid transparent;
+    border-bottom: 1px solid #575756;
+    border-radius: 0;
+    background-position: 100% center;
+}
+.instructions{
+    width: 1000px;
+    /*position: relative;*/
+    margin-left: 450px;
+    margin-top: 100px;
+}
+.instructions, .instructions h2{
+    font-family: 'Indie Flower', cursive;
+}
+.instructions h2{
+    font-size: 3em;
+}
+.instructions p, .instructions li{
+    font-size: 1.5em;
+}
+.board{
+    margin-top: 200px;
+    height: auto;
+}
+.img{
+    border: solid 1px black;
+    max-width: 30em;
+    max-height: 15em;
+    margin: 1em;
+}
+/* The stuff on top works*/
+/* Images need to be repositioned because our initial format doesn't work. 
+If you want start from scratch you can just delete the styles code below and restyle the inidvidual boxes in a new design */
+.img1{
+    display: block;
+    position:absolute;
+    top: 17%;
+    left: 13%;
+    z-index: 1;
+    border: solid 1px black;
+    background-color: #898AA6;
+}
+.img2{
+    display: block;
+    position:absolute;
+    top: 15%;
+    left: 38%;
+    z-index: 3;
+    border: solid px black;
+    background-color: #F2D7D9;
+}
+.img3{
+    display: block;
+    position:absolute;
+    top: 17%;
+    left: 63%;
+    z-index: 3;
+    border: solid 1px black;
+    background-color: #9A86A4;
+}
+.img4{
+    width: 35em;
+    height: 18em;
+    display: block;
+    position:absolute;
+    top: 40%;
+    left: 10%;
+    z-index: 0;
+    border: solid 1px black;
+    background-color: #5F7161;
+}
+.img5{
+    display: block;
+    width: 35em;
+    height: 20em;
+    position:absolute;
+    top: 40%;
+    left: 36%;
+    z-index: 3;
+    border: solid 3px black;
+    background-color: #525E75 ;
+}
+.img6{
+    width: 35em;
+    height: 18em;
+    display: block;
+    position:absolute;
+    top: 40%;
+    left: 63%;
+    z-index: 1;
+    border: solid 1px black;
+    background-color: #BB6464;
+}
+.img7{
+    display: block;
+    position:absolute;
+    top: 68%;
+    left: 13%;
+    z-index: 1;
+    border: solid 1px black;
+    background-color: #655D8A;
+}
+.img8{
+    display: block;
+    position:absolute;
+    top: 70%;
+    left: 38%;
+    z-index: 2;
+    border: solid 1px black;
+    background-color: #632626;
+}
+.img9{
+    display: block;
+    position:absolute;
+    top: 68%;
+    left: 62%;
+    z-index: 1;
+    border: solid 1px black;
+    background-color: #6E85B7;
+}

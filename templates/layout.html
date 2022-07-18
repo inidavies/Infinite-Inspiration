@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Indie+Flower&family=Jim+Nightshade&family=Walter+Turncoat&display=swap" rel="stylesheet">
+</head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            <a href="/"><h1 id="title">Infinite Inspiration</h1></a>
+        </div>
+    </nav>
+      {% block content %}{% endblock %}
+  </body>
+</html>
