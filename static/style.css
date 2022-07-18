@@ -123,8 +123,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 .img{
     border: solid 1px black;
-    max-width: 30em;
-    max-height: 15em;
+    width: 30em;
+    height: 15em;
     margin: 1em;
 }
 /* The stuff on top works*/
