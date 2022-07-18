@@ -1,4 +1,5 @@
 import random, requests
+
 #TODO: Go here (https://imagga.com/profile/dashboard) to get your API key and secret to run locally
 #https://www.thecolorapi.com/docs to get brightness (to pick suitable color)
 
@@ -35,10 +36,13 @@ def process_json_response(json):
     for color in unprocessed_background:
         processed_background += [color['html_code']]
     
-    for color in unprocessed_foreground:
-        processed_foreground += [color['html_code']]
+    #if you want to include foreground colors but idk
+    #for color in unprocessed_foreground:
+        #processed_foreground += [color['html_code']]
     
-    return eliminate_duplicates(processed_background, processed_foreground)
+    #if you want to include foreground colors but idk
+    #return eliminate_duplicates(processed_background, processed_foreground)
+    return processed_background
 
 #Description: gets the target color
 #Input: takes a single array of colors as input
@@ -58,10 +62,13 @@ def get_json_response_color_scheme(hex_color):
 
 #Description: picks the color from the API- not the lightest but also not nearly the darkes
 #Input: unprocessed json response
-#Output: hex color code
+#Output: lightest hex color code
 def process_json_response_color_scheme(response):
     colors = response['colors']
-    target = colors[-2]
+    target = colors[-1]
+    hsv = target['hsv']
+    print(hsv)
+    
     return target['hex']['clean']
 
 #USE THIS TO CALL IN OTHER LOCATIONS
@@ -69,8 +76,10 @@ def get_background_color(img_url):
     response = get_json_response_imagga(img_url)
     processed_response = process_json_response(response)
     color = pick_color(processed_response)
+    print("Original Color: " + color)
     color_scheme = get_json_response_color_scheme(color)
     final_color = process_json_response_color_scheme(color_scheme)
+    print("Final Color: " + final_color)
     return final_color
 
-print(get_background_color("https://th.bing.com/th/id/OIP.LIyeXFdvM83UkH_jNud3zwHaE5?pid=ImgDet&rs=1"))
+get_background_color("https://jooinn.com/images/dramatic-landscape-7.jpg")
