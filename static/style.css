@@ -1,4 +1,3 @@
-/* This stuff works. Issues start with the images*/
 body {
     font-family: "Poppins", sans-serif;
     color: #444444; 
@@ -25,7 +24,6 @@ h1, h2, h3, h4, h5, h6 {
     background-color: #898AA6;
     width: 100%;
     margin: 0 auto;
-    height: 20vh;
 }
 .container-fluid{
     font-size: 20px;
@@ -57,18 +55,12 @@ h1, h2, h3, h4, h5, h6 {
 @import url('https://fonts.googleapis.com/css?family=Raleway:400,700,900');
 
 .search__container {
-    /*position: absolute;
-    top: 10px;
-    left: 600px;
-    position: relative;
-    right:10em;*/
-
-    margin-top: 200px;
-    margin-left: 550px;
+    margin-top: 25vh;
+    margin-left: 30vw;
 }
     
 .search__input {
-    width: 50em;
+    width: 40vw;
     padding: 12px 24px;
 
     background-color: transparent;
@@ -104,9 +96,10 @@ h1, h2, h3, h4, h5, h6 {
     background-position: 100% center;
 }
 .instructions{
-    width: 1000px;
-    /*position: relative;*/
-    margin-left: 450px;
+    width: 60vw;
+    height: 100vh;
+    margin-left: 25vw;
+    margin-right: 25vw;
     margin-top: 100px;
 }
 .instructions, .instructions h2{
@@ -120,7 +113,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .board{
     margin-top: 200px;
-    height: auto;
+    margin-bottom: 65em;*/
 }
 .img{
     border: solid 1px black;
@@ -128,13 +121,10 @@ h1, h2, h3, h4, h5, h6 {
     height: 28vh;
     margin: 1vw;
 }
-/* The stuff on top works*/
-/* Images need to be repositioned because our initial format doesn't work. 
-If you want start from scratch you can just delete the styles code below and restyle the inidvidual boxes in a new design */
 .img1{
     display: block;
     position:absolute;
-    top: 22%; /* + 3*/
+    top: 22%;
     left: 13%;
     z-index: 1;
     border: solid 1px black;
