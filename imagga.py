@@ -1,5 +1,4 @@
 import random, requests
-
 #TODO: Go here (https://imagga.com/profile/dashboard) to get your API key and secret to run locally
 #https://www.thecolorapi.com/docs to get brightness (to pick suitable color)
 
@@ -36,13 +35,10 @@ def process_json_response(json):
     for color in unprocessed_background:
         processed_background += [color['html_code']]
     
-    #if you want to include foreground colors but idk
-    #for color in unprocessed_foreground:
-        #processed_foreground += [color['html_code']]
+    for color in unprocessed_foreground:
+        processed_foreground += [color['html_code']]
     
-    #if you want to include foreground colors but idk
-    #return eliminate_duplicates(processed_background, processed_foreground)
-    return processed_background
+    return eliminate_duplicates(processed_background, processed_foreground)
 
 #Description: gets the target color
 #Input: takes a single array of colors as input
@@ -66,9 +62,6 @@ def get_json_response_color_scheme(hex_color):
 def process_json_response_color_scheme(response):
     colors = response['colors']
     target = colors[-1]
-    hsv = target['hsv']
-    print(hsv)
-    
     return target['hex']['clean']
 
 #USE THIS TO CALL IN OTHER LOCATIONS
@@ -76,8 +69,6 @@ def get_background_color(img_url):
     response = get_json_response_imagga(img_url)
     processed_response = process_json_response(response)
     color = pick_color(processed_response)
-    print("Original Color: " + color)
     color_scheme = get_json_response_color_scheme(color)
     final_color = process_json_response_color_scheme(color_scheme)
-    print("Final Color: " + final_color)
     return final_color
