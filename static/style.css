@@ -123,8 +123,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 .img{
     border: solid 1px black;
-    width: 30em;
-    height: 15em;
+    width: 25vw;
+    height: 28vh;
     margin: 1em;
 }
 /* The stuff on top works*/
@@ -153,25 +153,25 @@ If you want start from scratch you can just delete the styles code below and res
     position:absolute;
     top: 17%;
     left: 63%;
-    z-index: 3;
+    z-index: 2;
     border: solid 1px black;
     background-color: #9A86A4;
 }
 .img4{
-    width: 35em;
-    height: 18em;
+    width: 29.5vw;
+    height: 28vh;
     display: block;
     position:absolute;
-    top: 40%;
-    left: 10%;
+    top: 42.5%;
+    left: 11%;
     z-index: 0;
     border: solid 1px black;
     background-color: #5F7161;
 }
 .img5{
     display: block;
-    width: 35em;
-    height: 20em;
+    width: 30vw;
+    height: 33vh;
     position:absolute;
     top: 40%;
     left: 36%;
@@ -180,12 +180,12 @@ If you want start from scratch you can just delete the styles code below and res
     background-color: #525E75 ;
 }
 .img6{
-    width: 35em;
-    height: 18em;
+    width: 29.5vw;
+    height: 28vh;
     display: block;
     position:absolute;
-    top: 40%;
-    left: 63%;
+    top: 42.5%;
+    left: 60%;
     z-index: 1;
     border: solid 1px black;
     background-color: #BB6464;
