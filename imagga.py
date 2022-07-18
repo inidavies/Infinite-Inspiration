@@ -81,5 +81,3 @@ def get_background_color(img_url):
     final_color = process_json_response_color_scheme(color_scheme)
     print("Final Color: " + final_color)
     return final_color
-
-get_background_color("https://jooinn.com/images/dramatic-landscape-7.jpg")
