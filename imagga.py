@@ -3,7 +3,8 @@ import random
 import requests
 
 
-# TODO: Go here (https://imagga.com/profile/dashboard) to get your API key and secret to run locally
+# TODO: call get_background_color to get background color from url
+
 # https://docs.imagga.com/#colors to get color from picture
 # https://www.thecolorapi.com/docs to get light enough version of the color to be suitable for background
 # can easily change this to get color palettes if we want
