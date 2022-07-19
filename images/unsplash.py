@@ -9,8 +9,8 @@ BASE_URL = 'https://api.unsplash.com/'
 __all__ = ['get_images']
 
 # Call this function
-def get_images(theme):
-    # theme = input('Enter your desired theme: ')
+def get_images():
+    theme = input('Enter your desired theme: ')
     response = request_images(theme)
     processed_info = process_json(response)
     return processed_info
@@ -18,7 +18,7 @@ def get_images(theme):
 # Description: chandles 
 def request_images(theme):
     headers = {'Authorization': 'Client-ID {token}'.format(token=CLIENT_ID), 'Accept-Version': 'v1'}
-    PARAMS = {'query': theme, 'orientation': 'landscape', 'count': 1}
+    PARAMS = {'query': theme, 'orientation': 'landscape', 'count': 9}
     r = requests.get(BASE_URL + '/photos/random', params = PARAMS, headers=headers)
     data = r.json()
     return data
@@ -29,9 +29,14 @@ def process_json(images_list):
     for image in images_list:
         image_id = image['id']
         alt_desc = image['alt_description']
-        urls = image['urls']
-        photographer = image['user']['name']
-        profile_link = image['user']['links']['html']
-        current_image = {'id':image_id, 'image_desc':alt_desc, 'urls':urls, 'photographer':photographer, 'photographer_profile':profile_link}
+        raw_url = image['urls']['raw']
+        full_url = image['urls']['full']
+        regular_url = image['urls']['regular']
+        small_url = image['urls']['small']
+        thumb_url = image['urls']['thumb']
+        small_s3_url = image['urls']['small_s3']
+        photographer_name = image['user']['name']
+        photographer_profile_link = image['user']['links']['html']
+        current_image = {'id':image_id, 'image_desc':alt_desc, 'raw_url':raw_url, 'full_url':full_url, 'regular_url':regular_url, 'small_url':small_url, 'thumb_url':thumb_url, 'small_s3_url':small_s3_url, 'photographer':photographer_name, 'photographer_profile':photographer_profile_link}
         all_data.append(current_image)
     return all_data
