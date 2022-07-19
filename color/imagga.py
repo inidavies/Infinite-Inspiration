@@ -1,25 +1,27 @@
 import os
 import random
 import requests
+import time
 
-
-# TODO: call get_background_color to get background color from url
+__all__ = ['background_color']
 
 # https://docs.imagga.com/#colors to get color from picture
-# https://www.thecolorapi.com/docs to get light enough version of the color to be suitable for background
-# can easily change this to get color palettes if we want
+# https://www.thecolorapi.com/docs to get light enough version of the
+# color to be suitable for background
+# Important info: doesn't work on goo.gl urls but does work on shortened urls (tinyurls)
 
 imagga_api_key = os.environ.get("IMAGGA_CLIENT_KEY")
 imagga_api_secret = os.environ.get("IMAGGA_CLIENT_SECRET")
 imagga_color_url = "https://api.imagga.com/v2/colors?image_url="
 
+
 # USE THIS TO CALL IN OTHER LOCATIONS
 # Description: driver for the imagga and The Color API interaction
 # Input: image url (from wherever you are currently working)
 # Output: Returns a string hex code if the url is good, and will return integer -1 if bad url
-def get_background_color(img_url):
+def background_color(img_url):
     response = get_json_response_imagga(img_url)
-    if type(response) is dict:
+    if type(response) is not str:
         processed_response = process_json_response(response)
         color = pick_color(processed_response)
         color_scheme = get_json_response_color_scheme(color)
@@ -32,34 +34,40 @@ def get_background_color(img_url):
         print(f'Final color: {final_color}')
         return final_color
     else:
-        print(str(response.status_code) + ": " + str(response.reason))
+        print(response)
         return -1
 
+# DO NOT USE ANY OF THE FUNCTIONS BELOW THIS LINE FOR ANYTHING OUTSIDE OF THIS SCRIPT
 # Description: handles the api call to imagga
 # Input: takes the image url as input
 # Output: returns the response in json format
 def get_json_response_imagga(img_url):
-    response = requests.get(imagga_color_url + img_url, auth=(imagga_api_key, imagga_api_secret))
+    response = -1
+
     try:
-        return response.json()
+        response = requests.get(imagga_color_url + img_url, auth=(imagga_api_key, imagga_api_secret), timeout=5)
+        return response.json()['result']
     except:
-        return response
+        if type(response) is int:
+            return "timeout"
+        else:
+            return str(response.status_code) + ": " + str(response.reason)
 
 # Description: gets up to 3 background colors and up to 3 foreground colors
 # Input: takes the json response as input
 # Output: returns a single array of non-duplicate colors
 def process_json_response(json):
-    unprocessed_background = json['result']['colors']['background_colors']
+    unprocessed_background = json['colors']['background_colors']
     processed_background = []
-    unprocessed_foreground = json['result']['colors']['foreground_colors']
+    unprocessed_foreground = json['colors']['foreground_colors']
     processed_foreground = []
 
     for color in unprocessed_background:
         processed_background += [color['html_code']]
-    
+
     for color in unprocessed_foreground:
         processed_foreground += [color['html_code']]
-    
+
     return eliminate_duplicates(processed_background, processed_foreground)
 
 # Description: eliminates duplicates from the two target arrays
@@ -101,7 +109,7 @@ def process_json_response_color_scheme(response):
         hsl = color['hsl']['l']
         if hsl >= 75:
             return color['hex']['value']
-    
+
     returnable_colors['lightest'] = colors[-1]['hex']['value']
     return returnable_colors
 
