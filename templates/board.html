@@ -1,9 +1,20 @@
 {% extends "layout.html" %}
 {% block content %}
-
+<head>
+    <style>
+        body {
+            background-color: {{ bgcolor }}
+        }
+    </style>
+</head>
     <div class="board">
-        {% for image in images %} 
-                <img class="img img{{ loop.index }}" src="{{ image }}" alt="">
-        {% endfor %} 
+        {% if images == -1 %}
+            <p class="empty message">We're sorry, we don't have any images from that search to inspire you <p>
+            <a href={{ home }} class="empty back">Go back</a>
+        {% else %}
+            {% for image in images %} 
+                    <img class="img img{{ loop.index }}" src="{{ image }}" alt="">
+            {% endfor %}
+        {% endif %}
     </div>
 {% endblock content %}

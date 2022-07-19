@@ -6,6 +6,8 @@ import secrets
 from flask_behind_proxy import FlaskBehindProxy
 from forms import Search_Form
 import os
+from color import background_color
+#from images import unsplash.py
 
 def request_images(theme):
     # Import the hidden client id and secret from os
@@ -28,7 +30,6 @@ def display_images(images):
         print(image['urls']['regular'])
     return image_urls
 
-
 #Create a flask app for the website
 app = Flask(__name__)
 proxied = FlaskBehindProxy(app)
@@ -50,9 +51,14 @@ def home():
 # Inspiration board webpage function
 @app.route("/board", methods=['GET'])
 def board():
-    image_data = request_images(session.get("search_term")) #makes request to the API based on the user's inputed search
-    image_urls = display_images(image_data)
-    return render_template('board.html', images=image_urls)
+    image_data = request_images(session.get("search_term")) # makes request to the API based on the user's inputed search
+    image_urls = display_images(image_data) # get a list of the requested images (url)
+    bgcolor = "#C9BBCF"
+    if len(image_urls) < 6:
+        image_urls = -1
+    else:
+        bgcolor = background_color(image_urls[4])
+    return render_template('board.html', images=image_urls, bgcolor = bgcolor, home=url_for("home"))
 
 
 if __name__ == '__main__':

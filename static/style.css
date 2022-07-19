@@ -115,6 +115,22 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 200px;
     margin-bottom: 65em;*/
 }
+.empty{
+    font-family: 'Indie Flower', cursive;
+    font-size: 2.5em;
+    position:absolute;
+    z-index: 3;
+    color: #BB6464;
+    font-weight: bold;
+}
+.message{
+    top: 45%;
+    left: 20%;
+}
+.back{
+    top: 55%;
+    left: 46%;
+}
 .img{
     border: solid 1px black;
     width: 25vw;
