@@ -2,14 +2,8 @@
 {% block content %}
 
     <div class="board">
-        <img class="img img1" src="https://hips.hearstapps.com/hmg-prod/images/190208-delish-ramen-horizontal-093-1550096715.jpg">
-        <img class="img img2" src="https://www.seriouseats.com/thmb/FIKq99kuApT8A8g_f9upmDB-g98=/1500x1125/filters:fill(auto,1)/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__2018__11__20181113-homemade-ramen-dark-broth-miso-tori-paitan-vicky-wasik-13-e5acfa2f8a1447648b130a41ed7d5b0e.jpg">
-        <img class="img img3" src="https://media.eggs.ca/assets/RecipeThumbs/_resampled/FillWyIxMjgwIiwiNzIwIl0/ramen.JPG">
-        <img class="img img4" src="https://www.budgetbytes.com/wp-content/uploads/2015/12/6-Ways-to-Upgrade-Instant-Ramen-eat-2-480x270.jpg">
-        <img class="img img5" src="https://www.elmundoeats.com/wp-content/uploads/2021/02/FP-Quick-30-minutes-chicken-ramen.jpg">
-        <img class="img img6" src="https://www.seriouseats.com/thmb/f6Ct3YOuOMKQ1Gwt343CJGD9cuo=/450x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__2018__11__20181113-homemade-ramen-noodles-vicky-wasik-32-9494a64cb1834607893f3267aed0a2a7.jpg">
-        <img class="img img7" src="https://upload.wikimedia.org/wikipedia/commons/8/85/Buldak_Ramen_20210114_004.jpg">
-        <img class="img img8" src="https://futuredish.com/wp-content/uploads/2020/10/Kujirai-Ramen-34.jpg">
-        <img class="img img9" src="https://www.papercitymag.com/wp-content/uploads/2021/01/Kintaro-Ramen-The-Karashi-Paitan-is-a-spicy-creamy-chicken-broth-topped-with-a-mayu-schmaltz-muneniku-6-minute-egg-pickled-red-ginge.jpg">
+        {% for image in images %} 
+                <img class="img img{{ loop.index }}" src="{{ image }}" alt="">
+        {% endfor %} 
     </div>
 {% endblock content %}
