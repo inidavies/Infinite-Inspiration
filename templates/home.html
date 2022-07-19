@@ -1,7 +1,20 @@
 {% extends "layout.html" %}
 {% block content %}
     <div class="search__container">
-        <input class="search__input" type="text" placeholder="Search">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            {% if form.search.errors %}
+            {{ form.search(class="search__input", placeholder="Search a theme") }}
+            <div class="invalid-feedback">
+                {% for error in form.search.errors%}
+                    <span>{{error}}</span>
+                {% endfor %}
+            </div>
+        </div>
+        {% else %}
+            {{ form.search(class="search__input", placeholder="Search a theme") }}
+        {% endif %}
+        </form>
     </div>
     <div class="instructions">
         <h2> How it Works </h2>
