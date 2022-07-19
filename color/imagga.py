@@ -1,19 +1,21 @@
 import os
 import random
 import requests
-import time
-
-__all__ = ['background_color']
 
 # https://docs.imagga.com/#colors to get color from picture
 # https://www.thecolorapi.com/docs to get light enough version of the
 # color to be suitable for background
 # Important info: doesn't work on goo.gl urls but does work on shortened urls (tinyurls)
+# Look at example.py for more info
 
-imagga_api_key = os.environ.get("IMAGGA_CLIENT_KEY")
-imagga_api_secret = os.environ.get("IMAGGA_CLIENT_SECRET")
-imagga_color_url = "https://api.imagga.com/v2/colors?image_url="
+#defining import * for the __init__.py file (to obscure all other functions)
+__all__ = ['background_color']
 
+# API keys and urls
+imagga_api_key = os.environ.get('IMAGGA_CLIENT_KEY')
+imagga_api_secret = os.environ.get('IMAGGA_CLIENT_SECRET')
+imagga_color_url = 'https://api.imagga.com/v2/colors?image_url='
+the_color_api_scheme_url = 'https://www.thecolorapi.com/scheme?hex='
 
 # USE THIS TO CALL IN OTHER LOCATIONS
 # Description: driver for the imagga and The Color API interaction
@@ -49,9 +51,9 @@ def get_json_response_imagga(img_url):
         return response.json()['result']
     except:
         if type(response) is int:
-            return "timeout"
+            return 'Timeout'
         else:
-            return str(response.status_code) + ": " + str(response.reason)
+            return str(response.status_code) + ': ' + str(response.reason)
 
 # Description: gets up to 3 background colors and up to 3 foreground colors
 # Input: takes the json response as input
@@ -94,7 +96,7 @@ def pick_color(color_options):
 def get_json_response_color_scheme(hex_color):
     #slicing the # off
     hex_color = hex_color[1:]
-    response = requests.get('https://www.thecolorapi.com/scheme?hex='+hex_color)
+    response = requests.get(the_color_api_scheme_url + hex_color)
     return response.json()
 
 # Description: picks the color from the API- not the lightest but also not nearly the darkes
