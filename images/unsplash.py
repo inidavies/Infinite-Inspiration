@@ -12,7 +12,7 @@ __all__ = ['get_images']
 def get_images():
     theme = input('Enter your desired theme: ')
     response = request_images(theme)
-    processed_info = process_json(response)
+    processed_info = process_json(response, theme)
     return processed_info
 
 # Description: chandles 
@@ -23,7 +23,7 @@ def request_images(theme):
     data = r.json()
     return data
 
-def process_json(images_list):
+def process_json(images_list, theme):
     all_data = []
 
     for image in images_list:
@@ -37,6 +37,6 @@ def process_json(images_list):
         small_s3_url = image['urls']['small_s3']
         photographer_name = image['user']['name']
         photographer_profile_link = image['user']['links']['html']
-        current_image = {'id':image_id, 'image_desc':alt_desc, 'raw_url':raw_url, 'full_url':full_url, 'regular_url':regular_url, 'small_url':small_url, 'thumb_url':thumb_url, 'small_s3_url':small_s3_url, 'photographer':photographer_name, 'photographer_profile':photographer_profile_link}
+        current_image = {'theme':theme, 'id':image_id, 'image_desc':alt_desc, 'raw_url':raw_url, 'full_url':full_url, 'regular_url':regular_url, 'small_url':small_url, 'thumb_url':thumb_url, 'small_s3_url':small_s3_url, 'photographer':photographer_name, 'photographer_profile':photographer_profile_link}
         all_data.append(current_image)
     return all_data
