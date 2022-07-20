@@ -4,7 +4,7 @@ from random import randint
 from flask_sqlalchemy import SQLAlchemy
 import secrets
 from flask_behind_proxy import FlaskBehindProxy
-from forms import Search_Form, Image_Click
+from forms import Search_Form, Refresh_Click
 import os
 from color import background_color
 from images import get_images
@@ -54,7 +54,8 @@ app.config['SECRET_KEY'] = secrets.token_hex(16)
 # Home webpage function
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    search_form = Search_Form() #Flask Form object
+    #Flask Form object
+    search_form = Search_Form()
     if search_image(search_form) == True:
         return redirect(url_for('board')) # if so - send to board page
     
@@ -64,9 +65,8 @@ def home():
 # Inspiration board webpage function
 @app.route("/board", methods=['GET', 'POST'])
 def board():
-    search_form = Search_Form() #Flask Form object
-    if search_image(search_form) == True:
-        return redirect(url_for('board')) # if so - send to board page
+    # Flask Form object
+    search_form = Search_Form()
 
     # Makes request to the API based on the user's inputed search; better implementation with a database  
     image_data = session['search_results']
@@ -96,7 +96,8 @@ def board():
 # Author credit webpage function
 @app.route("/credit", methods=['GET', 'POST'])
 def credit():
-    search_form = Search_Form() #Flask Form object
+    #Flask Form object
+    search_form = Search_Form()
     if search_image(search_form) == True:
         return redirect(url_for('board')) # if so - send to board page
 
