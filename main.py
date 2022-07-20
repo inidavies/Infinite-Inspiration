@@ -1,10 +1,10 @@
-from flask import Flask, render_template, url_for, flash, redirect, session
+from flask import Flask, render_template, url_for, flash, redirect, session, request
 import requests
 from random import randint
 from flask_sqlalchemy import SQLAlchemy
 import secrets
 from flask_behind_proxy import FlaskBehindProxy
-from forms import Search_Form
+from forms import Search_Form, Image_Click
 import os
 from color import background_color
 #from images import unsplash.py
@@ -27,7 +27,6 @@ def display_images(images):
     image_urls =[]
     for image in images:
         image_urls.append(image['urls']['regular'])
-        print(image['urls']['regular'])
     return image_urls
 
 #Create a flask app for the website
@@ -49,16 +48,35 @@ def home():
 
 
 # Inspiration board webpage function
-@app.route("/board", methods=['GET'])
+@app.route("/board", methods=['GET', 'POST'])
 def board():
     image_data = request_images(session.get("search_term")) # makes request to the API based on the user's inputed search
     image_urls = display_images(image_data) # get a list of the requested images (url)
     bgcolor = "#C9BBCF"
+
+    # Handles requests with varying list sizes
     if len(image_urls) < 6:
         image_urls = -1
+    elif 4 >= len(image_urls) and  len(image_urls) < 9:
+        bgcolor = background_color(len(image_urls)-1)
     else:
         bgcolor = background_color(image_urls[4])
+    
+    # When image is clicked, redirect to webpage displaying credits to the author
+    if request.method == 'POST':
+        #image_click_event = Image_Click() #image click form
+        session['image_click_url'] = request.form.get('submit')
+        return redirect(url_for("credit")) # Go to the credit page
+
     return render_template('board.html', images=image_urls, bgcolor = bgcolor, home=url_for("home"))
+
+# Author credit webpage function
+@app.route("/credit", methods=['GET', 'POST'])
+def credit():
+    image_url = session['image_click_url']
+    bgcolor = background_color(image_url) # changes the page color scheme based on the main image color
+
+    return render_template('credit.html', image=image_url, bgcolor = bgcolor)
 
 
 if __name__ == '__main__':

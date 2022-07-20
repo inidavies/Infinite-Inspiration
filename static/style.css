@@ -224,3 +224,11 @@ h1, h2, h3, h4, h5, h6 {
     border: solid 1px black;
     background-color: #6E85B7;
 }
+/*Credit page image styling*/
+.spotlight{
+    width: 70vw;
+    height: 70vh;
+    display: block;
+    margin-top: 17vh;
+    margin-left: 15vw;
+}

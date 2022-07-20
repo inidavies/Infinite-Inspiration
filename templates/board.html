@@ -13,7 +13,10 @@
             <a href={{ home }} class="empty back">Go back</a>
         {% else %}
             {% for image in images %} 
-                    <img class="img img{{ loop.index }}" src="{{ image }}" alt="">
+                <form method="POST" action="">
+                    <input type="image" class="img img{{ loop.index }}" src="{{ image }}" alt="" name="current_image" value="{{ image }}">
+                    <input type="hidden" style="display:none;" name="submit" value="{{ image }}">
+                </form>
             {% endfor %}
         {% endif %}
     </div>
