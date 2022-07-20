@@ -32,6 +32,17 @@ def search_image(form):
         session['search_results'] = image_data
         return True
 
+def get_main(image_urls):
+    # Handles requests with varying list sizes
+    if len(image_urls) < 6:
+        main_img = -1
+    elif 4 >= len(image_urls) and  len(image_urls) < 9:
+        main_img = len(image_urls)-1
+    else:
+        main_img = 4
+    return main_img
+
+
 #Create a flask app for the website
 app = Flask(__name__)
 proxied = FlaskBehindProxy(app)
@@ -63,25 +74,24 @@ def board():
     # Gets a list of the requested images (url)
     image_urls = get_urls(image_data)
 
-    # Handles requests with varying list sizes
-    if len(image_urls) < 6:
-        image_urls = -1
-    elif 4 >= len(image_urls) and  len(image_urls) < 9:
-        main_img = len(image_urls)-1
-    else:
-        main_img = 4
-    
-    page_colors = background_color(image_urls[main_img])
+    # Changes the page color scheme based on the main image color
+    main_index = get_main(image_urls)
+    page_colors = background_color(image_urls[main_index])
     bgcolor = page_colors['light']
     navcolor = page_colors['dark']
     
     # When image is clicked, redirect to webpage displaying credits to the author
     if request.method == 'POST':
-        #image_click_event = Image_Click() #image click form
-        session['image_click_url'] = request.form.get('submit')
+        image_click_url = request.form.get('submit')
+        session['image_click_url'] = image_click_url 
+        # Changes the page color scheme based on the main image color
+        page_colors = background_color(image_click_url)
+        session['bglight'] = page_colors["light"]
+        session['bgdark'] = page_colors["dark"]
         return redirect(url_for("credit")) # Go to the credit page
 
     return render_template('board.html', form=search_form, images=image_urls, bgcolor = bgcolor, navcolor=navcolor, home=url_for("home"))
+
 
 # Author credit webpage function
 @app.route("/credit", methods=['GET', 'POST'])
@@ -94,10 +104,9 @@ def credit():
     # author_data = get_credit(session['image_click_url'])
     
     image_url = session['image_click_url']
-    # Changes the page color scheme based on the main image color
-    page_colors = background_color(image_url)
-    bgcolor = page_colors['light']
-    navcolor = page_colors['dark']
+
+    bgcolor = session['bglight']
+    navcolor = session['bgdark']
 
     return render_template('credit.html',form=search_form, image=image_url, bgcolor = bgcolor, navcolor=navcolor)
 

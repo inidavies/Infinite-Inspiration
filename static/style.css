@@ -134,6 +134,7 @@ a:hover {
     width: 25vw;
     height: 28vh;
     margin: 1vw;
+    border-radius: 10px;
 }
 .img1{
     display: block;
