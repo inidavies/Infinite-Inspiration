@@ -51,7 +51,7 @@ def background_color(img_url):
 def get_json_response_imagga(img_url):
     response = -1
     try:
-        response = requests.get(imagga_color_url + img_url, auth=(imagga_api_key, imagga_api_secret), timeout=5)
+        response = requests.get(imagga_color_url + img_url, auth=(imagga_api_key, imagga_api_secret), timeout=15)
         return response.json()['result']
     except:
         if type(response) is int:
