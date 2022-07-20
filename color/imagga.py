@@ -20,23 +20,28 @@ the_color_api_scheme_url = 'https://www.thecolorapi.com/scheme?hex='
 # USE THIS TO CALL IN OTHER LOCATIONS
 # Description: driver for the imagga and The Color API interaction
 # Input: image url (from wherever you are currently working)
-# Output: Returns a string hex code if the url is good, and will return integer -1 if bad url
+# Output: Returns a dictionary with 2 elements: dark (darker color hex code)
+# and light (lighter color hex code) -1 if bad url
 def background_color(img_url):
     response = get_json_response_imagga(img_url)
     if type(response) is not str:
         processed_response = process_json_response(response)
         color = pick_color(processed_response)
         color_scheme = get_json_response_color_scheme(color)
-        final_color = process_json_response_color_scheme(color_scheme)
+        final_colors = process_json_response_color_scheme(color_scheme)
+        darkest = final_colors['dark']
 
-        while type(final_color) is dict:
-            color_scheme = get_json_response_color_scheme(final_color['lightest'])
-            final_color = process_json_response_color_scheme(color_scheme)
+        while len(final_colors) is 3:
+            color_scheme = get_json_response_color_scheme(final_colors['light'])
+            final_colors = process_json_response_color_scheme(color_scheme)
 
-        print(f'Final color: {final_color}')
-        return final_color
+        final_colors['dark'] = darkest
+
+        #print(f"Light color: {final_colors['light']}")
+        #print(f"Dark color: {final_colors['dark']}")
+        return final_colors
     else:
-        print(response)
+        #print(response)
         return -1
 
 # DO NOT USE ANY OF THE FUNCTIONS BELOW THIS LINE FOR ANYTHING OUTSIDE OF THIS SCRIPT
@@ -45,7 +50,6 @@ def background_color(img_url):
 # Output: returns the response in json format
 def get_json_response_imagga(img_url):
     response = -1
-
     try:
         response = requests.get(imagga_color_url + img_url, auth=(imagga_api_key, imagga_api_secret), timeout=5)
         return response.json()['result']
@@ -106,12 +110,15 @@ def get_json_response_color_scheme(hex_color):
 def process_json_response_color_scheme(response):
     colors = response['colors']
     returnable_colors = {}
+    
+    returnable_colors['dark'] = colors[2]['hex']['value']
 
     for color in colors:
         hsl = color['hsl']['l']
         if hsl >= 75:
-            return color['hex']['value']
+            returnable_colors['light'] = color['hex']['value']
+            return returnable_colors
 
-    returnable_colors['lightest'] = colors[-1]['hex']['value']
+    returnable_colors['light'] = colors[-1]['hex']['value']
+    returnable_colors['placeholder'] = ['not_finished']
     return returnable_colors
-

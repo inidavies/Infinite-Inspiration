@@ -1,12 +1,14 @@
 body {
-    font-family: "Poppins", sans-serif;
+    font-family: 'Indie Flower', cursive;
     color: #444444; 
     background-color: #C9BBCF;
     /*width: 430px;
     margin: 0 auto;*/
     overflow: auto;
 }
-
+h1, h1, h3, h4, h5{
+    font-family: 'Indie Flower', cursive;
+}
 a {
   text-decoration: none;
   color: white;
@@ -15,10 +17,6 @@ a {
 a:hover {
   color: black;
   text-decoration: none;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Indie Flower', cursive;
 }
 .navbar{
     background-color: #898AA6;
@@ -224,11 +222,24 @@ h1, h2, h3, h4, h5, h6 {
     border: solid 1px black;
     background-color: #6E85B7;
 }
-/*Credit page image styling*/
+/*Credit page styling*/
 .spotlight{
     width: 70vw;
     height: 70vh;
     display: block;
-    margin-top: 17vh;
+    margin-top: 5vh;
     margin-left: 15vw;
+}
+.credit_links{
+    font-size: 1em ;
+    margin-left: 30vw;
+    width: 40vw;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 0.5vh 0.5vw 0.5vh 0.5vw;
+    margin-bottom: 5vh;
+}
+.credit_links p{
+    margin-left: 2vw;
 }

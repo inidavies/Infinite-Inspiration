@@ -3,11 +3,24 @@
 <head>
     <style>
         body {
-            background-color: {{ bgcolor }}
+            background-color: {{ bgcolor }};
+        }
+        .navbar{
+            background-color: {{ navcolor }};
+        }
+        .search__container {
+            margin-top: 15vh;
+            margin-left: 28vw;
+        }
+        .credit_links{
+            background-color: {{ navcolor }};
         }
     </style>
 </head>
     <img class="spotlight img" src="{{ image }}" alt="">
-    <p></p>
-    <p></p>
+    <div class="credit_links">
+    <p>Author: </p>
+        <p>Visit the author's page: </p><a></a>
+        <p>Visit Unsplash: </p><a></a>
+    </div>
 {% endblock content %}

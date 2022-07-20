@@ -1,21 +1,5 @@
 {% extends "layout.html" %}
 {% block content %}
-    <div class="search__container">
-        <form method="POST" action="">
-            {{ form.hidden_tag() }}
-            {% if form.search.errors %}
-            {{ form.search(class="search__input", placeholder="Search a theme") }}
-            <div class="invalid-feedback">
-                {% for error in form.search.errors%}
-                    <span>{{error}}</span>
-                {% endfor %}
-            </div>
-        </div>
-        {% else %}
-            {{ form.search(class="search__input", placeholder="Search a theme") }}
-        {% endif %}
-        </form>
-    </div>
     <div class="instructions">
         <h2> How it Works </h2>
         <p> Do you need some inspiration for your project or trip? A visual aide to find the aesthetic you're looking for?</p>

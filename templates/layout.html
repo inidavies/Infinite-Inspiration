@@ -7,6 +7,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Indie+Flower&family=Jim+Nightshade&family=Walter+Turncoat&display=swap" rel="stylesheet">
 </head>
   <body>
+      <div class="search__container">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            {% if form.search.errors %}
+            {{ form.search(class="search__input", placeholder="Search a theme") }}
+            <div class="invalid-feedback">
+                {% for error in form.search.errors%}
+                    <span>{{error}}</span>
+                {% endfor %}
+            </div>
+        </div>
+        {% else %}
+            {{ form.search(class="search__input", placeholder="Search a theme") }}
+        {% endif %}
+        </form>
+    </div>
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
         <div class="container-fluid">
