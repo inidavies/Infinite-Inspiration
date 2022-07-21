@@ -30,7 +30,8 @@ def background_color(img_url):
         darkest = final_colors['dark']
 
         while len(final_colors) is 3:
-            color_scheme = get_json_response_color_scheme(final_colors['light'])
+            target_color = final_colors['light']
+            color_scheme = get_json_response_color_scheme(target_color)
             final_colors = process_json_response_color_scheme(color_scheme)
 
         final_colors['dark'] = darkest
@@ -40,21 +41,24 @@ def background_color(img_url):
         return -1
 
 
-# DO NOT USE ANY OF THE FUNCTIONS BELOW THIS LINE FOR ANYTHING OUTSIDE OF THIS SCRIPT
+# DO NOT USE ANY OF THE FUNCTIONS BELOW THIS LINE 
+# FOR ANYTHING OUTSIDE OF THIS SCRIPT
 # Description: handles the api call to imagga
 # Input: takes the image url as input
 # Output: returns the response in json format
 def get_json_response_imagga(img_url):
     response = -1
-    try:
-        response = requests.get(imagga_color_url + img_url, auth=(imagga_api_key, imagga_api_secret), timeout=15)
+    auth_header = (imagga_api_key, imagga_api_secret)
+    target_url = imagga_color_url +img_url
+    response = requests.get(target_url, auth=auth_header, timeout=30)
+
+    if type(response) is int:
+        return 'Timeout'
+    elif int(response.status_code) != 200:
+        resp = str(response.status_code) + ': ' + str(response.reason)
+        return resp
+    else:
         return response.json()['result']
-    except:
-        if type(response) is int:
-            return 'Timeout'
-        else:
-            resp = str(response.status_code) + ': ' + str(response.reason)
-            return resp
 
 
 # Description: gets up to 3 background and foreground colors (6 max total)

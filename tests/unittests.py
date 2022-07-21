@@ -10,12 +10,12 @@ the_color_api_id_url = 'https://www.thecolorapi.com/id?hex='
 class ImageUnitTests(unittest.TestCase):
     def setUp(self):
         self.bing_url = "https://th.bing.com/th/id/OIP."
-                       +"LIyeXFdvM83UkH_jNud3zwHaE5?pid=ImgDet&rs=1"
+        self.bing_url += "LIyeXFdvM83UkH_jNud3zwHaE5?pid=ImgDet&rs=1"
         self.unsplash_url = "https://source.unsplash.com/gySMaocSdqs/w=600"
         self.shortened_url = "https://tinyurl.com/2area6w6"
 
     def testIsDictionary(self):
-        bing_data = background_color(bing_url)
+        bing_data = background_color(self.bing_url)
         self.assertIsInstance(bing_data, dict)
 
     def testIsDictionaryUnsplash(self):
