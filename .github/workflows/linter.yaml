@@ -16,4 +16,4 @@ jobs:
         run: python -m pip install --upgrade pip pycodestyle
 
       - name: Check Style
-        run: pycodestyle color/imagga.py images/unsplash.py tests/unittests.py
+        run: pycodestyle --first color/imagga.py images/unsplash.py tests/*.py
