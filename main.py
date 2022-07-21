@@ -8,14 +8,30 @@ from forms import Search_Form
 import os
 from color import background_color
 from images import get_images
-from dbtable import previous_boards
+from dbtable import previous_boards, create_database, create_table
 
+#Variables
+
+
+#just in case server goes down while someone is using our website
+if os.path.exists('boards.db'):
+    os.remove('boards.db')
+
+# Create the database to store search history
+engine = create_database()
 
 def get_urls(images):
     image_urls =[]
     for image in images:
         image_urls.append(image['regular_url'])
     return image_urls
+
+def get_theme(images):
+    image_themes =[]
+    for theme in images:
+        image_themes.append(theme[5]['theme'])
+    return image_themes
+    board_urls =[]
 
 def get_credit(images, spotlight):
     image_author = []
@@ -30,7 +46,7 @@ def search_image(form):
     # Gets the search term from the form
     if form.validate_on_submit(): # checks if search entry is valid
         # Makes request to the API based on the user's inputed search; better implementation with a database, move to home page
-        image_data = get_images(form.search.data)
+        image_data = create_table(engine, form.search.data)
         session["search_term"] = form.search.data
         session['search_results'] = image_data
         return True
@@ -89,7 +105,7 @@ def board(search_term):
         image_click_url = request.form.get('submit')
         if image_click_url == "refresh":
             # Refreshes the webpage with the current search
-            image_data = get_images(search_term)
+            image_data = create_table(engine, search_term)
             session['search_results'] = image_data
             image_urls = get_urls(image_data)
             main_index = get_main(image_urls)
@@ -111,11 +127,10 @@ def board(search_term):
 # Author credit webpage function
 @app.route("/credit", methods=['GET', 'POST'])
 def credit():
-    print(previous_boards())
     #Flask Form object
     search_form = Search_Form()
     if search_image(search_form) == True:
-        return redirect(url_for('board')) # if so - send to board page
+        return redirect(url_for('board', search_term=search_form.search.data)) # if so - send to board page
     
     image_url = session['image_click_url']
 
@@ -135,15 +150,34 @@ def faves():
     #Flask Form object
     search_form = Search_Form()
     if search_image(search_form) == True:
-        return redirect(url_for('board')) # if so - send to board page
+        return redirect(url_for('board', search_term=search_form.search.data)) # if so - send to board page
     
+    history = previous_boards()
+
+    # Get main display image, store boards in a session variable
+    board_urls =[]
+    session["history"] = []
+    for board in history:
+        board_urls.append(board[4]['thumb_url'])
+        session["history"].append(board)
+    image_themes = get_theme(history)
+
+    # Get board images
+    image_urls =[]
+    for board in history:
+        image_urls.append(board)
+    
+    image_themes = get_theme(history)
+
+
     if request.method == 'POST':
         # Sets session search results to the chosen previous search results
-        session['search_results'] = request.form.get('submit')
+        board_key = int(request.form.get('submit'))
+        session['search_results'] = session["history"][board_key]
         # Redirects to a page displaying that board
         return redirect(url_for("board", search_term="past_board"))
 
-    return render_template('faves.html', form=search_form)
+    return render_template('faves.html', form=search_form, board=board_urls, themes=image_themes)
 
 
 if __name__ == '__main__':
