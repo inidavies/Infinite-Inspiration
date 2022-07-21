@@ -6,7 +6,6 @@ import requests
 # https://www.thecolorapi.com/docs to get light enough version of the
 # color to be suitable for background
 # Important info: doesn't work on goo.gl urls but does work on shortened urls (tinyurls)
-# Look at example.py for more info
 
 #defining import * for the __init__.py file (to obscure all other functions)
 __all__ = ['background_color']
@@ -24,7 +23,6 @@ the_color_api_scheme_url = 'https://www.thecolorapi.com/scheme?hex='
 # and light (lighter color hex code) -1 if bad url
 def background_color(img_url):
     response = get_json_response_imagga(img_url)
-    print(f'Response: {response}')
     if type(response) is not str:
         processed_response = process_json_response(response)
         color = pick_color(processed_response)
@@ -38,11 +36,8 @@ def background_color(img_url):
 
         final_colors['dark'] = darkest
 
-        #print(f"Light color: {final_colors['light']}")
-        #print(f"Dark color: {final_colors['dark']}")
         return final_colors
     else:
-        #print(response)
         return -1
 
 # DO NOT USE ANY OF THE FUNCTIONS BELOW THIS LINE FOR ANYTHING OUTSIDE OF THIS SCRIPT
@@ -57,11 +52,9 @@ def get_json_response_imagga(img_url):
         return response.json()['result']
     except:
         if type(response) is int:
-            print('Timeout')
             return 'Timeout'
         else:
             resp = str(response.status_code) + ': ' + str(response.reason)
-            print(resp)
             return resp
 
 # Description: gets up to 3 background colors and up to 3 foreground colors
