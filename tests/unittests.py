@@ -1,7 +1,6 @@
 import unittest
 import requests
 import sys
-import time
 
 sys.path.append('../Infinite-Inspiration')
 from color import background_color
