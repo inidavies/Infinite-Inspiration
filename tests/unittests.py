@@ -7,6 +7,7 @@ from color import background_color
 
 the_color_api_id_url = 'https://www.thecolorapi.com/id?hex='
 
+
 class ImageUnitTests(unittest.TestCase):
     def setUp(self):
         self.bing_url = "https://th.bing.com/th/id/OIP."
@@ -21,7 +22,7 @@ class ImageUnitTests(unittest.TestCase):
     def testIsDictionaryUnsplash(self):
         unsplash_data = background_color(self.unsplash_url)
         self.assertIsInstance(unsplash_data, dict)
-    
+
     def testIsDictionaryShortened(self):
         shortened_url_data = background_color(self.shortened_url)
         self.assertIsInstance(shortened_url_data, dict)
@@ -38,7 +39,8 @@ class ImageUnitTests(unittest.TestCase):
         unsplash_data = background_color(self.unsplash_url)
         self.assertIsInstance(unsplash_data, dict)
         light = unsplash_data['light'][1:]
-        response = requests.get(the_color_api_id_url + light).json()['hsl']['l']
+        response = requests.get(the_color_api_id_url + light).json()
+        response = response['hsl']['l']
         self.assertGreaterEqual(response, 75)
 
     def testLightColorResponseHSLLightnessBing(self):
