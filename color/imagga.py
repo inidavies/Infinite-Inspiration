@@ -39,6 +39,7 @@ def background_color(img_url):
     else:
         return -1
 
+
 # DO NOT USE ANY OF THE FUNCTIONS BELOW THIS LINE FOR ANYTHING OUTSIDE OF THIS SCRIPT
 # Description: handles the api call to imagga
 # Input: takes the image url as input
@@ -55,7 +56,8 @@ def get_json_response_imagga(img_url):
             resp = str(response.status_code) + ': ' + str(response.reason)
             return resp
 
-# Description: gets up to 3 background colors and up to 3 foreground colors
+
+# Description: gets up to 3 background and foreground colors (6 max total)
 # Input: takes the json response as input
 # Output: returns a single array of non-duplicate colors
 def process_json_response(json):
@@ -72,15 +74,17 @@ def process_json_response(json):
 
     return eliminate_duplicates(processed_background, processed_foreground)
 
+
 # Description: eliminates duplicates from the two target arrays
 # Input: takes the foreground and background color arrays as input
-# Output: returns a single array with all colors from both that aren't duplicates
+# Output: returns a single array with all colors without duplicates
 def eliminate_duplicates(background, foreground):
     to_return = foreground
     for color in background:
         if color not in to_return:
             to_return += [color]
     return to_return
+
 
 # Description: gets the target color from the array of options
 # Input: takes a single array of colors as input
@@ -95,15 +99,16 @@ def pick_color(color_options):
 # Input: hex color code with hashtag
 # Output: json response from API
 def get_json_response_color_scheme(hex_color):
-    #slicing the # off
+    # slicing the # off
     hex_color = hex_color[1:]
     response = requests.get(the_color_api_scheme_url + hex_color)
     return response.json()
 
 
-# Description: picks the color from the API- not the lightest but also not nearly the darkes
+# Description: picks a suitably light color from the API
 # Input: unprocessed json response
-# Output: lightest hex color code if hsl is greater than 75, if it is less than, it returns the 
+# Output: lightest hex color code if hsl is greater than 75
+# if it is less than 75, it returns the
 # lighest color to be rerun (to get a lighter version of it)
 def process_json_response_color_scheme(response):
     colors = response['colors']
