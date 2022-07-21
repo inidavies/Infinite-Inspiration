@@ -36,7 +36,7 @@ def request_images(theme):
         data = r.json()
         return data
     else:
-        str(response.status_code) + ': ' + str(response.reason)
+        str(r.status_code) + ': ' + str(r.reason)
 
 
 def process_json(images_list, theme):

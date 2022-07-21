@@ -4,8 +4,12 @@ import sys
 
 sys.path.append('../Infinite-Inspiration')
 from color import background_color  # noqa E402
+from images import get_images  # noqa E402
 
 the_color_api_id_url = 'https://www.thecolorapi.com/id?hex='
+
+good_list = ["office", "forest", "blue", "dogs", "summer", "happy"]
+bad_list = ["workk", ";lkaj;dsflk'dal", ";;;;;;;;;;", "03940813941"]
 
 
 class ImageUnitTests(unittest.TestCase):
@@ -15,15 +19,32 @@ class ImageUnitTests(unittest.TestCase):
         self.unsplash_url = "https://source.unsplash.com/gySMaocSdqs/w=600"
         self.shortened_url = "https://tinyurl.com/2area6w6"
 
-    def testIsDictionary(self):
+    """
+    Testing for unsplash.py (which is in images package)
+    """
+    def testUnsplashGoodInputResponseIsList(self):
+        for theme in good_list:
+            response = get_images(theme)
+            self.assertIsInstance(response, list)
+
+    def testUnsplashLengthOfGoodResponse(self):
+        for theme in good_list:
+            response = get_images(theme)
+            self.assertEqual(len(response), 9)
+
+    def testUnsplashBadInputResponseIsInt(self):
+        for theme in bad_list:
+            response = get_images(theme)
+            self.assertIsInstance(response, int)
+
+    """
+    Testing for imagga.py (which is in color package)
+    """
+    def testImaggaResponseIsDictionary(self):
         bing_data = background_color(self.bing_url)
         self.assertIsInstance(bing_data, dict)
-
-    def testIsDictionaryUnsplash(self):
         unsplash_data = background_color(self.unsplash_url)
         self.assertIsInstance(unsplash_data, dict)
-
-    def testIsDictionaryShortened(self):
         shortened_url_data = background_color(self.shortened_url)
         self.assertIsInstance(shortened_url_data, dict)
 
