@@ -17,7 +17,7 @@ jobs:
           python -m pip install --upgrade pip pytest pycodestyle coverage requests
 
       - name: Test with unittest
-        run: python3 -m unittest unittests.py
+        run: python3 -m unittest ../tests/unittests.py
           
       - name: Check code coverage
         run: |
