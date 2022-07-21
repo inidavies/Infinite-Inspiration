@@ -17,4 +17,7 @@ jobs:
           python -m pip install --upgrade pip pytest pycodestyle coverage requests
 
       - name: Test with unittest
+        env:
+          IMAGGA_CLIENT_KEY: ${{ secrets.IMAGGA_CLIENT_KEY }}
+          IMAGGA_CLIENT_SECRET: ${{ secrets.IMAGGA_CLIENT_SECRET }}
         run: python3 tests/unittests.py
