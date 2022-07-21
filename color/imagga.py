@@ -61,7 +61,7 @@ def get_json_response_imagga(img_url):
             return 'Timeout'
         else:
             resp = str(response.status_code) + ': ' + str(response.reason)
-            print resp
+            print(resp)
             return resp
 
 # Description: gets up to 3 background colors and up to 3 foreground colors
