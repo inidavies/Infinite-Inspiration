@@ -46,7 +46,6 @@ def background_color(img_url):
 # Output: returns the response in json format
 def get_json_response_imagga(img_url):
     response = -1
-    print(f'Image URL: {img_url}')
     try:
         response = requests.get(imagga_color_url + img_url, auth=(imagga_api_key, imagga_api_secret), timeout=15)
         return response.json()['result']
