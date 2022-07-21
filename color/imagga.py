@@ -24,6 +24,7 @@ the_color_api_scheme_url = 'https://www.thecolorapi.com/scheme?hex='
 # and light (lighter color hex code) -1 if bad url
 def background_color(img_url):
     response = get_json_response_imagga(img_url)
+    print(f'Response: {response}')
     if type(response) is not str:
         processed_response = process_json_response(response)
         color = pick_color(processed_response)
@@ -50,14 +51,18 @@ def background_color(img_url):
 # Output: returns the response in json format
 def get_json_response_imagga(img_url):
     response = -1
+    print(f'Image URL: {img_url}')
     try:
         response = requests.get(imagga_color_url + img_url, auth=(imagga_api_key, imagga_api_secret), timeout=15)
         return response.json()['result']
     except:
         if type(response) is int:
+            print('Timeout')
             return 'Timeout'
         else:
-            return str(response.status_code) + ': ' + str(response.reason)
+            resp = str(response.status_code) + ': ' + str(response.reason)
+            print resp
+            return resp
 
 # Description: gets up to 3 background colors and up to 3 foreground colors
 # Input: takes the json response as input
