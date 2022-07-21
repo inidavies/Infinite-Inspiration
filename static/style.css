@@ -1,13 +1,11 @@
 body {
-    font-family: 'Indie Flower', cursive;
+    font-family: Palatino, URW Palladio L, serif;
     color: #444444; 
     background-color: #C9BBCF;
-    /*width: 430px;
-    margin: 0 auto;*/
     overflow: auto;
 }
 h1, h1, h3, h4, h5{
-    font-family: 'Indie Flower', cursive;
+    font-family: 'Merienda', Helvetica, sans-serif;
 }
 a {
   text-decoration: none;
@@ -27,7 +25,6 @@ a:hover {
     font-size: 20px;
     width: 15%;
     height: 50%;
-    /* Center horizontally*/
     margin: 0 auto;
 }
 .navbar-custom {
@@ -37,7 +34,7 @@ a:hover {
   left: 0;
   width: 100%;
   z-index: 3;
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: Palatino, URW Palladio L, serif;
 }
 .navbar-custom .navbar-brand {
   font-weight: 800;
@@ -101,7 +98,7 @@ a:hover {
     margin-top: 100px;
 }
 .instructions, .instructions h2{
-    font-family: 'Indie Flower', cursive;
+    font-family: 'Merienda', Helvetica, sans-serif;
 }
 .instructions h2{
     font-size: 3em;
@@ -244,4 +241,68 @@ a:hover {
     text-align: center;
 }
 .credit_links p{
+}
+.refresh{
+    float:right;
+    margin-right: 20vw;
+    margin-top: -4.5vh;
+    background-color: purple;
+    color:white;
+    border-radius: 100px;
+    cursor: pointer;
+    display: inline-block;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 250ms;
+    border: 0;
+    font-size: 16px;
+    font-family: 'Indie Flower', cursive;
+}
+
+.refresh:hover {
+  color: black;
+  font-weight: bolder;
+  transform: scale(1.05) rotate(-1deg);
+}
+#faves{
+    position: absolute;
+    top: 4vh;
+    left: 87vw;
+    width: 100%;
+    z-index: 3;
+    font-family: 'Indie Flower', cursive;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+ul{
+    list-style-type: none;
+}
+.hist{
+    width: 45vw;
+    margin: 5vh 0 3vh 24.5vw;
+    height: 15vh;
+    background-color: #DFCAA0;
+    padding-left: 0vw;
+    padding-top: 3vh;
+    border-radius: 10px;
+    text-align: center;
+    padding-bottom: 3vh;
+}
+.hist_img{
+    border: solid 1px black;
+    width:auto;
+    height: 15vh;
+    border-radius: 10px;
+    margin-bottom: 0;
+}
+.hist_item{
+    display: inline-block;
+}
+.theme{
+    font-size: 2em;
+    position: relative;
+    top: -7vh;
+    margin-left: 2vw;
+    
 }

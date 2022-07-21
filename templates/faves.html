@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block content %}
+<head>
+    <style>
+        .search__container {
+            margin-top: 15vh;
+            margin-left: 28vw;
+        }
+    </style>
+</head> 
+<ul>
+    <li>
+        <div class="hist">
+            <form method="POST" action="">
+                <input type="image" class="hist_item hist_img" src="https://images.unsplash.com/photo-1593610539249-bc01bf2d3442?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNDc1ODV8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTg0MjYyNDY&ixlib=rb-1.2.1&q=80&w=1080" alt="" name="current_image" value="{{ image }}">
+                <input type="hidden" style="display:none;" name="submit" value="{{ image }}">
+                <div class=" hist_item theme"><h2>Theme: Ocean </h2>
+            </form>
+        </div>
+    </li>
+</ul>
+{% for board in boards %} 
+    <div class="hist">
+        <form method="POST" action="">
+            <input type="image" class="hist_item hist_img" src="{{ image }}" alt="" name="current_image" value="{{ image }}">
+            <input type="hidden" style="display:none;" name="submit" value="{{ image_urls }}">
+            <div class="hist_item theme"><h2>Theme: {{ theme }} </h2>
+        </form>
+    </div>
+{% endfor %}
+{% endblock content %}
