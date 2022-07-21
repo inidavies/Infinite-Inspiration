@@ -3,7 +3,7 @@ import requests
 import sys
 
 sys.path.append('../Infinite-Inspiration')
-from color import background_color # noqa E402
+from color import background_color  # noqa E402
 
 the_color_api_id_url = 'https://www.thecolorapi.com/id?hex='
 
