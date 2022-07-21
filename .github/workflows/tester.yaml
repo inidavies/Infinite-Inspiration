@@ -1,4 +1,4 @@
-name: Color Tests
+name: Tests
 on: push
 
 jobs:
