@@ -31,7 +31,7 @@ def request_images(theme):
                'Accept-Version': 'v1'}
     PARAMS = {'query': theme, 'orientation': 'landscape', 'count': 9}
     r = requests.get(BASE_URL + '/photos/random',
-                     params=PARAMS, headers=headers, timeout=30)
+                     params=PARAMS, headers=headers, timeout=60)
     if r.status_code == 200:
         data = r.json()
         return data
