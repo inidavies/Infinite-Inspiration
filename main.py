@@ -157,7 +157,7 @@ def board(search_term):
             Image_click_url = image_click_url 
             # Changes the page color scheme based on the main image color
             page_colors = background_color(image_click_url)
-            if type(page_color) is int:
+            if type(page_colors) is int:
                 Bglight = page_colors["light"]
                 Bgdark = page_colors["dark"]
             else:
