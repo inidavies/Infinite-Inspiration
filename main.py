@@ -224,6 +224,7 @@ def faves():
         # Store the colors in a list with corresponding indexes
         # to the board list
         page_colors = background_color(board[4]['thumb_url'])
+
         if type(page_colors) is int:
             bgcolor = "#C9BBCF"
             navcolor = "#898AA6"
