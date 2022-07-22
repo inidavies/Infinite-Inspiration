@@ -205,8 +205,8 @@ def faves():
         # Get the bgcolors using the main image of the board
         # Store the colors in a list with corresponding indexes
         # to the board list
-        page_colors = background_color(board[4]['main'])
-        bgcolors.append = [ page_colors['light'], page_colors['dark']]
+        page_colors = background_color(board[4]['thumb_url'])
+        bgcolors.append([ page_colors['light'], page_colors['dark']])
     image_themes = get_theme(history)
 
     # Get board images
