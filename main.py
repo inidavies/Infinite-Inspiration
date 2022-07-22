@@ -121,9 +121,8 @@ def board(search_term):
         # Changes the page color scheme based on the main image color
         main_index = get_main(image_urls)
         page_colors = background_color(image_urls[main_index])
-        if type(page_colors) is dict:
-            bgcolor = page_colors['light']
-            navcolor = page_colors['dark']
+        bgcolor = page_colors['light']
+        navcolor = page_colors['dark']
     else:
         bgcolor = "#C9BBCF"
         navcolor = "#898AA6"
@@ -140,12 +139,8 @@ def board(search_term):
                 # Changes the page color scheme based on the main image color
                 main_index = get_main(image_urls)
                 page_colors = background_color(image_urls[main_index])
-                if type(page_colors) is dict:
-                    bgcolor = page_colors['light']
-                    navcolor = page_colors['dark']
-                else:
-                    bgcolor = "#C9BBCF"
-                    navcolor = "#898AA6"
+                bgcolor = page_colors['light']
+                navcolor = page_colors['dark']
             else:
                 bgcolor = "#C9BBCF"
                 navcolor = "#898AA6"
@@ -154,12 +149,8 @@ def board(search_term):
             Image_click_url = image_click_url 
             # Changes the page color scheme based on the main image color
             page_colors = background_color(image_click_url)
-            if type(page_colors) is dict:
-                Bglight = page_colors["light"]
-                Bgdark = page_colors["dark"]
-            else:
-                Bglight = "#C9BBCF"
-                Bgdark = "#898AA6"
+            Bglight = page_colors["light"]
+            Bgdark = page_colors["dark"]
             return redirect(url_for("credit")) # Go to the credit page
 
     return render_template('board.html', form=search_form, images=image_urls, bgcolor = bgcolor, navcolor=navcolor, home=url_for("home"), faves=url_for("faves"))
@@ -221,7 +212,7 @@ def faves():
         # Store the colors in a list with corresponding indexes
         # to the board list
         page_colors = background_color(board[4]['thumb_url'])
-        if type(page_colors) is int:
+        if int(page_colors):
             bgcolor = "#C9BBCF"
             navcolor = "#898AA6"
             bgcolors.append([bgcolor, navcolor])
