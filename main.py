@@ -43,7 +43,7 @@ def get_theme(images):
 
 def get_credit(images, spotlight):
     image_author = []
-    print(image)
+    print(images)
     print(spotlight)
     for image in images:
         if spotlight == image['regular_url']:
