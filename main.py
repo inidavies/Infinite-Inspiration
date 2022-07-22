@@ -44,13 +44,17 @@ def get_theme(images):
 def get_credit(images, spotlight):
     image_author = []
     print(images)
+    print("")
     print(spotlight)
+    print("")
     for image in images:
         if spotlight == image['regular_url']:
             image_author.append(image['photographer'])
             image_author.append(image['photographer_profile'])
             break
+    print("")
     print(image_author)
+    print("")
     return image_author
 
 def search_image(form):
