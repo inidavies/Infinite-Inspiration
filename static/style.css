@@ -245,6 +245,7 @@ a:hover {
     padding-bottom: 0.5vh;
     margin-bottom: 5vh;
     text-align: center;
+    font-family: 'Merienda', Helvetica, sans-serif;
 }
 .credit_links p{
 }
@@ -294,6 +295,7 @@ ul{
     border-radius: 10px;
     text-align: center;
     padding-bottom: 3vh;
+    font-family: 'Merienda', Helvetica, sans-serif;
 }
 .hist_img{
     border: solid 1px black;
