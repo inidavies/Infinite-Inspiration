@@ -240,7 +240,7 @@ def faves():
     if request.method == 'POST':
         # Sets session search results to the chosen previous search results
         board_key = int(request.form.get('submit'))
-        Search_results = History[board_key]
+        Search_results = History[board_key - 1]
         # Redirects to a page displaying that board
         return redirect(url_for("board", search_term="past_board"))
 
