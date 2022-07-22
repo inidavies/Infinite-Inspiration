@@ -158,7 +158,7 @@ def board(search_term):
                 Bglight = page_colors["light"]
                 Bgdark = page_colors["dark"]
             else:
-                Bglight = #C9BBCF"
+                Bglight = "#C9BBCF"
                 Bgdark = "#898AA6"
             return redirect(url_for("credit")) # Go to the credit page
 
