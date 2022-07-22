@@ -116,16 +116,21 @@ a:hover {
     position:absolute;
     z-index: 3;
     color: #BB6464;
-    font-weight: bold;
 }
 .message{
     top: 45%;
-    left: 20%;
+    left: 15%;
 }
 .back{
     top: 55%;
-    left: 46%;
+    left: 43%;
+    color: white;
 }
+.back:hover{
+    font-weight: bolder;
+    font-size: 3em;
+}
+
 .img{
     border: solid 1px black;
     width: 25vw;
@@ -291,18 +296,18 @@ ul{
 }
 .hist_img{
     border: solid 1px black;
-    width:auto;
+    width: 10vw;
     height: 15vh;
     border-radius: 10px;
     margin-bottom: 0;
+    margin-right: 2vw;
 }
 .hist_item{
     display: inline-block;
 }
 .theme{
-    font-size: 2em;
+    font-size: 1em;
     position: relative;
     top: -7vh;
-    margin-left: 2vw;
-    
+    width: 10vw;
 }
