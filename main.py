@@ -135,10 +135,15 @@ def board(search_term):
             image_data = create_table(engine, search_term)
             Search_results = image_data
             image_urls = get_urls(image_data)
-            main_index = get_main(image_urls)
-            page_colors = background_color(image_urls[main_index])
-            bgcolor = page_colors['light']
-            navcolor = page_colors['dark']
+            if type(image_urls) is list:
+                # Changes the page color scheme based on the main image color
+                main_index = get_main(image_urls)
+                page_colors = background_color(image_urls[main_index])
+                bgcolor = page_colors['light']
+                navcolor = page_colors['dark']
+            else:
+                bgcolor = "#C9BBCF"
+                navcolor = "#898AA6"
         else:
             # When image is clicked, redirect to webpage displaying credits to the author
             Image_click_url = image_click_url 
@@ -191,30 +196,41 @@ def faves():
     if search_image(search_form) == True:
         return redirect(url_for('board', search_term=search_form.search.data)) # if so - send to board page
     
-    history = previous_boards()
+    History = previous_boards()
 
     # Get main display image, store boards in a session variable
     board_urls = []
     bgcolors = []
-    for board in history:
+    img_index = []
+    index = 0
+    for board in History:
         # Get the main image of each board from the list
         # Use the name image of the board as a thumbnail
         board_urls.append(board[4]['thumb_url'])
-        History.append(board)
 
         # Get the bgcolors using the main image of the board
         # Store the colors in a list with corresponding indexes
         # to the board list
         page_colors = background_color(board[4]['thumb_url'])
-        bgcolors.append([ page_colors['light'], page_colors['dark']])
-    image_themes = get_theme(history)
+        if int(page_colors):
+            bgcolor = "#C9BBCF"
+            navcolor = "#898AA6"
+            bgcolors.append([bgcolor, navcolor])
+            img_index.append(index)
+        else:
+            bgcolors.append([ page_colors['light'], page_colors['dark']])
+            img_index.append(index)
+        index += 1
+
+        # Store the key/index for each image in a list for easy pairing
+    image_themes = get_theme(History)
 
     # Get board images
     image_urls =[]
-    for board in history:
+    for board in History:
         image_urls.append(board)
 
-    image_themes = get_theme(history)
+    image_themes = get_theme(History)
 
 
     if request.method == 'POST':
@@ -224,7 +240,7 @@ def faves():
         # Redirects to a page displaying that board
         return redirect(url_for("board", search_term="past_board"))
 
-    return render_template('faves.html', form=search_form, board=board_urls, themes=image_themes, bgcolors= bgcolors)
+    return render_template('faves.html', form=search_form, board=board_urls, themes=image_themes, bgcolors= bgcolors, img_index=img_index)
 
 
 if __name__ == '__main__':
