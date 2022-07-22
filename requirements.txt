@@ -12,6 +12,6 @@ Jinja2==3.0.1
 MarkupSafe==2.0.1
 pytest==6.2.4
 pycodestyle==2.7.0
+requests
 Werkzeug==2.0.1
 WTForms==2.3.3
-requests==2.18.4
