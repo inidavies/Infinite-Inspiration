@@ -121,8 +121,9 @@ def board(search_term):
         # Changes the page color scheme based on the main image color
         main_index = get_main(image_urls)
         page_colors = background_color(image_urls[main_index])
-        bgcolor = page_colors['light']
-        navcolor = page_colors['dark']
+        if type(page_colors) is dict:
+            bgcolor = page_colors['light']
+            navcolor = page_colors['dark']
     else:
         bgcolor = "#C9BBCF"
         navcolor = "#898AA6"
@@ -153,8 +154,12 @@ def board(search_term):
             Image_click_url = image_click_url 
             # Changes the page color scheme based on the main image color
             page_colors = background_color(image_click_url)
-            Bglight = page_colors["light"]
-            Bgdark = page_colors["dark"]
+            if type(page_colors) is dict:
+                Bglight = page_colors["light"]
+                Bgdark = page_colors["dark"]
+            else:
+                Bglight = #C9BBCF"
+                Bgdark = "#898AA6"
             return redirect(url_for("credit")) # Go to the credit page
 
     return render_template('board.html', form=search_form, images=image_urls, bgcolor = bgcolor, navcolor=navcolor, home=url_for("home"), faves=url_for("faves"))
@@ -240,7 +245,7 @@ def faves():
     if request.method == 'POST':
         # Sets session search results to the chosen previous search results
         board_key = int(request.form.get('submit'))
-        Search_results = History[board_key - 1]
+        Search_results = History[board_key]
         # Redirects to a page displaying that board
         return redirect(url_for("board", search_term="past_board"))
 
