@@ -24,9 +24,7 @@ class ImageUnitTests(unittest.TestCase):
     """
     def testUnsplashGoodInputResponseIsList(self):
         for theme in good_list:
-            print(theme)
             response = get_images(theme)
-            print(response)
             self.assertIsInstance(response, list)
 
     def testUnsplashLengthOfGoodResponse(self):
