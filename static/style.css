@@ -93,7 +93,7 @@ a:hover {
 .instructions{
     width: 60vw;
     height: 100vh;
-    margin-left: 20vw;
+    margin-left: 25vw;
     margin-right: 25vw;
     margin-top: 100px;
 }
@@ -101,7 +101,8 @@ a:hover {
     font-family: 'Merienda', Helvetica, sans-serif;
 }
 .instructions h2{
-    font-size: 3em;
+    font-size: 2.7em;
+    margin-left: 2vw;
 }
 .instructions p, .instructions li{
     font-size: 1.5em;
