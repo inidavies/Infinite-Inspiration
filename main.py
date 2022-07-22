@@ -139,8 +139,12 @@ def board(search_term):
                 # Changes the page color scheme based on the main image color
                 main_index = get_main(image_urls)
                 page_colors = background_color(image_urls[main_index])
-                bgcolor = page_colors['light']
-                navcolor = page_colors['dark']
+                if type(page_colors) is dict:
+                    bgcolor = page_colors['light']
+                    navcolor = page_colors['dark']
+                else:
+                    bgcolor = "#C9BBCF"
+                    navcolor = "#898AA6"
             else:
                 bgcolor = "#C9BBCF"
                 navcolor = "#898AA6"
