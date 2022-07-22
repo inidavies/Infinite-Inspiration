@@ -118,6 +118,8 @@ def get_json_response_color_scheme(hex_color):
 def process_json_response_color_scheme(response):
     colors = response['colors']
     returnable_colors = {}
+    
+    returnable_colors['dark'] = colors[2]['hex']['value']
 
     returnable_colors['dark'] = colors[2]['hex']['value']
 
@@ -129,4 +131,5 @@ def process_json_response_color_scheme(response):
 
     returnable_colors['light'] = colors[-1]['hex']['value']
     returnable_colors['placeholder'] = ['not_finished']
+
     return returnable_colors

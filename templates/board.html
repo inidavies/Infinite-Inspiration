@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block content %}
+<head>
+    <style>
+        body {
+            background-color: {{ bgcolor }};
+        }
+        .navbar{
+            background-color: {{ navcolor }};
+        }
+        .search__container {
+            margin-top: 13vh;
+            margin-left: 28vw;
+        }
+        .img{
+            border-color: {{ navcolor }};
+        }
+        .refresh{
+            background-color: {{ navcolor }}
+        }
+    </style>
+</head>
+    <div>
+        <form method="POST" action="">
+            <input class="refresh" type="submit" name="submit" value="refresh">
+        </form>
+    </div>
+    <div class="board">
+        {% if images == -1 %}
+            <p class="empty message">We're sorry, we don't have any images from that search to inspire you <p>
+            <a href={{ home }} class="empty back">Go back</a>
+        {% else %}
+            {% for image in images %} 
+                <form method="POST" action="">
+                    <input type="image" class="img img{{ loop.index }}" src="{{ image }}" alt="" name="current_image" value="{{ image }}">
+                    <input type="hidden" style="display:none;" name="submit" value="{{ image }}">
+                </form>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock content %}

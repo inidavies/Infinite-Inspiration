@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block content %}
+<head>
+    <style>
+        .search__container {
+            margin-top: 15vh;
+            margin-left: 28vw;
+        }
+        {% for item in bgcolors %} 
+            .theme{{ loop.index }}{
+                color: {{ item[1] }}
+            }
+            .hist{{ loop.index }}{
+                background-color: {{ item[0] }}
+            }
+        {% endfor %}
+    </style>
+</head> 
+<ul>
+{% for item in board %} 
+        <li>
+            <div class="hist hist{{ loop.index }}">
+                <form method="POST" action="">
+                    <input type="image" class="hist_item hist_img" src="{{ item }}" alt="" name="current_image">
+                    <input type="hidden" style="display:none;" name="submit" value="{{ loop.index }}">
+                    <div class="hist_item theme theme{{ loop.index }}"><h2>Theme: {{ themes[loop.index0] }} </h2>
+                </form>
+            </div>
+        </li>
+{% endfor %}
+</ul>
+{% endblock content %}
