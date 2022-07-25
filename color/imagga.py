@@ -30,7 +30,7 @@ def background_color(img_url):
         final_colors = process_json_response_color_scheme(color_scheme)
         darkest = final_colors['dark']
 
-        while len(final_colors) is 3:
+        while len(final_colors) == 3:
             target_color = final_colors['light']
             color_scheme = get_json_response_color_scheme(target_color)
             final_colors = process_json_response_color_scheme(color_scheme)
