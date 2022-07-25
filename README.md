@@ -1,15 +1,14 @@
 # Infinite-Inspiration
-Infinite Inspiration is a web program that creates a inspiration moodboard or collage of images based on a
-user's chosen theme, with a background to match. 
+Infinite Inspiration is a vision board generator made for those looking for inspiration.
 
 ### API Usage
-This website uses 
-* Unsplash API to provide a collection of images
-* Imagga API to pick a color from the main image
+Infinite Inspiration uses
+* Unsplash API to provide board images
+* Imagga API to pick a color from board's main image
 * The Color API for color conversion and scheming
 
 ### Features
-Each user can create a moodboard based on the their theme, with a background color based on the images collected, by entering their theme into the search bar and clicking 'Enter'. Then they can click into each image on the moodboard and get more information about the photographer who took the photo. Additionally, the user can go back and see their previous moodboards.
+A user enters their theme into the search bar. They then can click into each image on the board and get more information about the photographer who took the photo. Additionally, they can go back and see their previous boards.
 
 ### CI
 ![check-style](https://github.com/inidavies/Infinite-Inspiration/actions/workflows/linter.yaml/badge.svg)
