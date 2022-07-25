@@ -13,7 +13,7 @@ from images import get_images
 from dbtable import previous_boards
 from dbtable import create_database, create_table
 
-# Variables
+# Variables to be used globally
 Search_term = ""
 Search_results = {}
 Image_click_url = ""
@@ -30,6 +30,9 @@ engine = create_database()
 
 
 def get_urls(images):
+    ''' Gets the url variables for each element in
+    the list of images '''
+
     image_urls = []
     if type(images) is list:
         for image in images:
@@ -40,6 +43,9 @@ def get_urls(images):
 
 
 def get_theme(images):
+    ''' Gets the theme variables for each element in
+    the list of images '''
+
     image_themes = []
     for theme in images:
         image_themes.append(theme[5]['theme'])
@@ -48,6 +54,9 @@ def get_theme(images):
 
 
 def get_credit(images, spotlight):
+    ''' Gets the photographer name and profile link variables
+    from each element in the list of images '''
+
     image_author = []
     for image in images:
         if spotlight == image['regular_url']:
@@ -58,10 +67,14 @@ def get_credit(images, spotlight):
 
 
 def search_image(form):
+    ''' Uses the search form data to make the api request
+    and returns a dictionary of the search results '''
+
     global Search_term
     global Search_results
+
     # Gets the search term from the form
-    if form.validate_on_submit():  # checks if search entry is valid
+    if form.validate_on_submit():
         # Makes request to the API based on the user's inputed search
         image_data = create_table(engine, form.search.data)
         Search_term = form.search.data
@@ -70,7 +83,9 @@ def search_image(form):
 
 
 def get_main(image_urls):
-    # Handles requests with varying list sizes
+    ''' Handles API requests with varying
+    search result dictionary sizes '''
+
     if len(image_urls) < 6:
         main_img = -1
     elif 4 >= len(image_urls) and len(image_urls) < 9:
@@ -91,12 +106,19 @@ app.config['SECRET_KEY'] = secrets.token_hex(16)
 # Home webpage function
 @app.route("/", methods=['GET', 'POST'])
 def home():
+    ''' This function renders the home page template
+    and it's functionality'''
+
+    # Search bar functionality
     search_form = Search_Form()  # Flask Form object
     valid_search = search_image(search_form)
     if valid_search is True:
         # if so - send to board page
         return redirect(url_for('board', search_term=search_form.search.data))
 
+    ''' If the user has not made previous searches
+    during the current session the link to the faves page
+    will not be visible '''
     display = "block"
     if History == []:
         display = "none"
@@ -108,6 +130,9 @@ def home():
 # Inspiration board webpage function
 @app.route("/board/<search_term>", methods=['GET', 'POST'])
 def board(search_term):
+    ''' This function renders the board page template
+    and it's functionality'''
+
     global Search_term
     global Search_results
     global Image_click_url
@@ -115,7 +140,7 @@ def board(search_term):
     global Bglight
     global History
 
-    # Search bar
+    # Search bar functionality
     search_form = Search_Form()  # Flask Form object
     valid_search = search_image(search_form)
     if valid_search is True:
@@ -124,9 +149,10 @@ def board(search_term):
 
     # Makes request to the API based on the user's inputed search
     image_data = Search_results
-    # Gets a list of the requested images (url)
 
+    # Gets a list of the requested images (url)
     image_urls = get_urls(image_data)
+    # In case there is a timeout with the color picker API
     if type(image_urls) is list:
         # Changes the page color scheme based on the main image color
         main_index = get_main(image_urls)
@@ -142,8 +168,9 @@ def board(search_term):
         navcolor = "#898AA6"
 
     if request.method == 'POST':
-        image_click_url = request.form.get('submit')
-        if image_click_url == "refresh":
+        # The click event is either refresh or a clicked image
+        click_event = request.form.get('submit')
+        if click_event == "refresh":
             # Refreshes the webpage with the current search
             image_data = create_table(engine, search_term)
             Search_results = image_data
@@ -164,9 +191,10 @@ def board(search_term):
         else:
             ''' When image is clicked, redirect to webpage
                 displaying credits to the author '''
-            Image_click_url = image_click_url
+
+            Image_click_url = click_event
             # Changes the page color scheme based on the main image color
-            page_colors = background_color(image_click_url)
+            page_colors = background_color(click_event)
             if type(page_colors) is dict:
                 Bglight = page_colors["light"]
                 Bgdark = page_colors["dark"]
@@ -183,6 +211,9 @@ def board(search_term):
 # Author credit webpage function
 @app.route("/credit", methods=['GET', 'POST'])
 def credit():
+    ''' This function renders the credit page template
+    and it's functionality'''
+
     global Search_term
     global Search_results
     global Image_click_url
@@ -190,6 +221,7 @@ def credit():
     global Bglight
     global History
 
+    # Search functionality
     search_form = Search_Form()  # Flask Form object
     valid_search = search_image(search_form)
     if valid_search is True:
@@ -198,12 +230,14 @@ def credit():
 
     image_url = Image_click_url
 
-    # Returns author information
+    # Gets the author information
     image_data = Search_results
     author_data = get_credit(image_data, image_url)
     author_name = author_data[0]
     author_profile = author_data[1]
 
+    ''' Gets the bg color for the author page;
+    globally assgned in the board page'''
     bgcolor = Bglight
     navcolor = Bgdark
 
@@ -215,6 +249,9 @@ def credit():
 
 @app.route("/favs", methods=['GET', 'POST'])
 def faves():
+    ''' This function renders the faves page template
+    and it's functionality'''
+
     global Search_term
     global Search_results
     global Image_click_url
@@ -222,6 +259,7 @@ def faves():
     global Bglight
     global History
 
+    # Search functionality
     search_form = Search_Form()  # Flask Form object
     valid_search = search_image(search_form)
     if valid_search is True:
@@ -230,7 +268,7 @@ def faves():
 
     History = previous_boards()
 
-    # Get main display image, store boards in a session variable
+    # Get main display image, store boards in a session/global variable
     board_urls = []
     bgcolors = []
     img_index = []
