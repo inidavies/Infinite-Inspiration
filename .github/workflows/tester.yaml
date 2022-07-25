@@ -22,4 +22,16 @@ jobs:
           IMAGGA_CLIENT_SECRET: ${{ secrets.IMAGGA_CLIENT_SECRET }}
           UNSPLASH_CLIENT_ID: ${{ secrets.UNSPLASH_CLIENT_ID }}
           UNSPLASH_CLIENT_SECRET: ${{ secrets.UNSPLASH_CLIENT_SECRET }}
-        run: python3 tests/unittests.py
+        run: python3 -m unittest tests/unittests.py
+          
+      - name: Check code coverage
+        run: |
+          python3 -m coverage run -m unittest tests/unittests.py
+          python3 -m coverage report
+          python3 -m coverage html
+          
+      - name: Archive code coverage HTML report
+        uses: actions/upload-artifact@v2
+        with:
+           name: code-coverage-report
+           path: htmlcov
